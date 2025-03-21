@@ -42,6 +42,10 @@ data "aws_availability_zones" "azs" {
   state = "available"
 }
 
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current-region" {}
+
 resource "aws_instance" "myserver" {
   ami = data.aws_ami.ubuntu.id
   instance_type = "t3.nano"
@@ -65,6 +69,14 @@ output "aws_vpc_id" {
 
 output "aws_azs" {
   value = data.aws_availability_zones.azs.names
+}
+
+output "aws_caller_identity" {
+  value = data.aws_caller_identity.current
+}
+
+output "current_region" {
+  value = data.aws_region.current-region
 }
 
 
